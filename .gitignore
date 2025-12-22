@@ -189,3 +189,6 @@ memory.db
 
 # vscode settings
 .vscode/
+
+# folders created from local run of langgraph api
+**/.langgraph_api/
