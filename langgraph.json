@@ -1,0 +1,8 @@
+{
+    "dependencies": ["."],
+    "graphs": {
+        "email_agent": "./agents-cookbook/email_agent.py:agent",
+        "personal_chef": "./lc-create-agent-basics/personal_chef.py:agent"
+    },
+    "env": "./.env"
+  }
