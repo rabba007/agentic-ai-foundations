@@ -37,3 +37,37 @@ def web_search(query: str) -> Dict[str, Any]:
           additional natural language text.
     """
     return tavily_client.search(query)
+
+
+from langchain_community.utilities import SQLDatabase
+db = SQLDatabase.from_uri("sqlite:///../assets/Chinook.db")
+
+@tool
+def run_sql_query(query: str) -> str:
+    """
+    Execute a SQL query against the Chinook SQLite database.
+
+    This tool runs a read-only SQL query on the Chinook database and
+    returns the result as a string. It is intended for retrieving
+    information such as records, aggregates, or filtered data.
+    Any execution errors are caught and returned as error messages.
+
+    Args:
+        query (str): A valid SQL query to execute against the database.
+            The query should be compatible with SQLite syntax.
+
+    Returns:
+        str: The query result as a string if execution is successful.
+        If an error occurs, a string describing the error is returned.
+
+    Examples:
+        >>> run_sql_query("SELECT * FROM Artist LIMIT 5;")
+        '[(1, "AC/DC"), (2, "Accept"), ...]'
+
+        >>> run_sql_query("SELECT COUNT(*) FROM Track;")
+        '[(3503,)]'
+    """
+    try:
+        return db.run(query)
+    except Exception as e:
+        return f"Error: {e}"
