@@ -192,3 +192,5 @@ memory.db
 
 # folders created from local run of langgraph api
 **/.langgraph_api/
+
+test.ipynb
